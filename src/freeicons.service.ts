@@ -39,6 +39,8 @@ export class FreeIconsService {
     fg = this.formatHex(fg || defaults.fg);
     bg = this.formatHex(bg || defaults.bg);
 
+    px = px || defaults.px;
+    py = py || defaults.py;
 
     const inverted = this.isInverted(fg);
 
@@ -72,16 +74,19 @@ export class FreeIconsService {
       radius,
     };
 
+    const path = icon.svg.replace(/.+(<path.+\/>)<\/svg>/g, '$1');
+
     const svg = `
       <svg 
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        viewBox="0 0 24 24"
         fill="${foreground.color}"
         width="${foreground.width}"
         height="${foreground.height}"
       >
         <rect fill="${background.color}" width="100%" height="100%" rx="${background.radius}" />
-        <svg width="${background.height}" height="${background.height}" x="${px}" y="${py}" >
-          ${icon.svg}
-        </svg>
+        ${path}
       </svg>
     `;
     return svg;
