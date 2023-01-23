@@ -85,7 +85,6 @@ export class FreeIconsService {
         width="${foreground.width}"
         height="${foreground.height}"
       >
-        <rect fill="${background.color}" width="100%" height="100%" rx="${background.radius}" />
         ${path}
       </svg>
     `;
