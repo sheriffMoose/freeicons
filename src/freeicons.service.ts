@@ -33,8 +33,8 @@ export class FreeIconsService {
       type: 'none',
     };
 
-    width = width || defaults.width;
-    height = height || defaults.height;
+    width = width || size || defaults.width;
+    height = height || size || defaults.height;
 
     fg = this.formatHex(fg || defaults.fg);
     bg = this.formatHex(bg || defaults.bg);
