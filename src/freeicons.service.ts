@@ -30,6 +30,7 @@ export class FreeIconsService {
       px: '15',
       py: '15',
       radius: '0',
+      viewBox: '-1 -1 26 26',
       type: 'none',
     };
 
@@ -51,26 +52,18 @@ export class FreeIconsService {
     };
 
     let radius = defaults.radius;
+    let viewBox = defaults.viewBox;
     if (type === 'rounded') {
       radius = '10%';
-      px = '5%';
-      py = '5%';
-      width = '90%';
-      height = '90%';
+      viewBox = '-3 -3 30 30';
     } else if (type === 'circle') {
       radius = '100%';
-      px = '10%';
-      py = '10%';
-      width = '80%';
-      height = '80%';
+      viewBox = '-5 -5 35 35';
     }
 
     const background = {
       color: inverted ? defaults.fg : bg,
-      width: width,
-      height,
-      px,
-      py,
+      viewBox,
       radius,
     };
 
@@ -80,12 +73,15 @@ export class FreeIconsService {
       <svg 
         xmlns="http://www.w3.org/2000/svg"
         role="img"
-        viewBox="0 0 24 24"
+        viewBox="0 0 100 100"
         fill="${foreground.color}"
         width="${foreground.width}"
         height="${foreground.height}"
       >
-        ${path}
+        <rect fill="${background.color}" width="100%" height="100%" rx="${background.radius}" />
+        <svg viewBox="${background.viewBox}">
+          ${path}
+        </svg>
       </svg>
     `;
     return svg;
@@ -97,9 +93,5 @@ export class FreeIconsService {
 
   formatHex(str) {
     return /[0-9A-Fa-f]{6}/g.test(str) ? `#${str}`.replace('##', '#') : str;
-  }
-
-  calcDimension(dimension, str) {
-    return str.endsWith('%') ? (parseFloat(str) * dimension / 100) : parseFloat(str);
   }
 }
